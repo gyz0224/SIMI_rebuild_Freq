@@ -1,0 +1,78 @@
+# 默认忽略全部文件和目录，只保留下方列出的训练与网络源码。
+# 新增源码目录或训练入口时，需要在此添加对应的白名单。
+*
+
+# Git 规则、基础训练入口与依赖声明。
+!/.gitignore
+!/train.py
+!/requirements.txt
+
+# 训练配置；只保留数据加载代码，不包含图像数据。
+!/configs/
+!/configs/*.yaml
+!/configs/*.yml
+!/datasets/
+!/datasets/*.py
+
+# 网络结构、损失、训练器及其辅助代码。
+!/models/
+!/models/*.py
+!/losses/
+!/losses/*.py
+!/trainers/
+!/trainers/*.py
+!/utils/
+!/utils/*.py
+
+# 频域实验的公共训练代码。
+!/experiments/
+!/experiments/bit_frequency/
+!/experiments/bit_frequency/__init__.py
+!/experiments/bit_frequency/common.py
+!/experiments/bit_frequency/training.py
+!/experiments/bit_frequency/requirements.txt
+!/experiments/bit_frequency/configs/
+!/experiments/bit_frequency/configs/*.yaml
+!/experiments/bit_frequency/configs/*.yml
+!/experiments/bit_frequency/modules/
+!/experiments/bit_frequency/modules/*.py
+!/experiments/bit_frequency/scripts/
+!/experiments/bit_frequency/scripts/_bootstrap.py
+!/experiments/bit_frequency/scripts/preflight.py
+!/experiments/bit_frequency/scripts/train_bf.py
+
+# BF-06/BF-07 的训练器与网络模块。
+!/experiments/bit_frequency/advanced/
+!/experiments/bit_frequency/advanced/__init__.py
+!/experiments/bit_frequency/advanced/_bootstrap.py
+!/experiments/bit_frequency/advanced/integration.py
+!/experiments/bit_frequency/advanced/layers.py
+!/experiments/bit_frequency/advanced/protocol.py
+!/experiments/bit_frequency/advanced/train.py
+!/experiments/bit_frequency/advanced/trainer.py
+
+# BF-08/BF-09 的分阶段训练与网络集成。
+!/experiments/bit_frequency/stage_frequency/
+!/experiments/bit_frequency/stage_frequency/__init__.py
+!/experiments/bit_frequency/stage_frequency/_bootstrap.py
+!/experiments/bit_frequency/stage_frequency/integration.py
+!/experiments/bit_frequency/stage_frequency/protocol.py
+!/experiments/bit_frequency/stage_frequency/train.py
+!/experiments/bit_frequency/stage_frequency/trainer.py
+
+# 各 BF 变体仅保留网络、训练启动脚本和原始配置。
+!/experiments/bit_frequency/BF-*/
+!/experiments/bit_frequency/BF-*/model.py
+!/experiments/bit_frequency/BF-*/train.sh
+!/experiments/bit_frequency/BF-*/config.yaml
+!/experiments/bit_frequency/BF-*/config.yml
+!/experiments/bit_frequency/BF-*/config.json
+
+# 即使未来扩展白名单，也继续排除缓存、权重与历史输出。
+__pycache__/
+*.py[cod]
+*.pth
+*.pt
+snapshots_light/
+outputs/
+results/
