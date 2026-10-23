@@ -1,0 +1,132 @@
+{
+  "enhancement_backbone": "dea",
+  "bit_mode": "binary",
+  "enhancement_guidance": "none",
+  "data": {
+    "root": "/home/u104754253089/model/dataset/SICE/SIMI/train",
+    "image_size": 512,
+    "num_workers": 4,
+    "shuffle": true,
+    "pin_memory": true,
+    "drop_last": false,
+    "legacy_order": false
+  },
+  "runtime": {
+    "device": "cuda:0",
+    "seed": 1143,
+    "deterministic": true
+  },
+  "output": {
+    "root": "/home/u104754253089/SIMI/SIMI_rebuild_Freq/experiments/bit_frequency/BF-08/run"
+  },
+  "amp": {
+    "enabled": true,
+    "dtype": "float16",
+    "init_scale": 64.0,
+    "growth_factor": 2.0,
+    "backoff_factor": 0.5,
+    "growth_interval": 2000
+  },
+  "train": {
+    "mode": "joint",
+    "batch_size": 8,
+    "epochs": 52,
+    "activation_checkpointing": true,
+    "lr": 1e-05,
+    "weight_decay": 0.0001,
+    "adamw_betas": [
+      0.9,
+      0.999
+    ],
+    "adamw_eps": 1e-08,
+    "adamw_amsgrad": false,
+    "grad_clip_norm": 0.1,
+    "display_iter": 100,
+    "snapshots_folder": "/home/u104754253089/SIMI/SIMI_rebuild_Freq/experiments/bit_frequency/BF-08/run/weights",
+    "load_pretrain": false,
+    "resume_optimizers": true,
+    "resume_mode": "full",
+    "pretrain_dir": ""
+  },
+  "validation": {
+    "enabled": true,
+    "lpips_net": "alex",
+    "datasets": {
+      "LOLv1": {
+        "low_dir": "/home/u104754253089/model/dataset/LOLv1/Test/input",
+        "high_dir": "/home/u104754253089/model/dataset/LOLv1/Test/target"
+      },
+      "LOLv2real": {
+        "low_dir": "/home/u104754253089/model/dataset/LOLv2/Real_captured/Test/Low",
+        "high_dir": "/home/u104754253089/model/dataset/LOLv2/Real_captured/Test/Normal"
+      },
+      "LOLv2syn": {
+        "low_dir": "/home/u104754253089/model/dataset/LOLv2/Synthetic/Test/Low",
+        "high_dir": "/home/u104754253089/model/dataset/LOLv2/Synthetic/Test/Normal"
+      },
+      "LSRWhuawei": {
+        "low_dir": "/home/u104754253089/model/dataset/LSRW/Eval/Huawei/low",
+        "high_dir": "/home/u104754253089/model/dataset/LSRW/Eval/Huawei/high"
+      },
+      "LSRWNikon": {
+        "low_dir": "/home/u104754253089/model/dataset/LSRW/Eval/Nikon/low",
+        "high_dir": "/home/u104754253089/model/dataset/LSRW/Eval/Nikon/high"
+      },
+      "SICE": {
+        "low_dir": "/home/u104754253089/model/dataset/SICE/SIMI/part2_eval512/low",
+        "high_dir": "/home/u104754253089/model/dataset/SICE/SIMI/part2_eval512/high"
+      }
+    }
+  },
+  "scheduler": {
+    "step_size": 250,
+    "gamma": 0.99
+  },
+  "loss": {
+    "patch_size": 4,
+    "brightness": 0.8,
+    "smooth_a_weight": 1000.0,
+    "smooth_b_weight": 5000.0,
+    "exposure_weight": 5.0,
+    "local_color_weight": 1000.0,
+    "global_color_weight": 1500.0,
+    "denoising_ssim_weight": 10.0,
+    "denoising_gradient_weight": 40.0,
+    "denoising_smooth_weight": 1.0,
+    "denoising_scale": 10.0,
+    "ssim_data_range": 1.0
+  },
+  "inference": {
+    "checkpoint": "",
+    "input": "",
+    "output": "results",
+    "gt": "",
+    "stage": "denoising",
+    "benchmark": true,
+    "warmup": 3
+  },
+  "stage_frequency": {
+    "experiment": "BF-08",
+    "version": 1,
+    "initialization_seed": 1143,
+    "max_steps": 19656,
+    "log_interval": 100,
+    "observation_epochs": [
+      19,
+      29,
+      40,
+      52
+    ],
+    "budget_definition": "historical_joint_batch_iterations; successful_optimizer_updates_logged_separately",
+    "native_binary_order": "R7..R0,G7..G0,B7..B0",
+    "new_module_precision": "float32",
+    "residual_head_initialization": "zero",
+    "GT_used_in_training_or_module_selection": false,
+    "width": 16,
+    "amplitude_bound": 0.1,
+    "logit_bound": 0.1,
+    "fft_norm": "ortho",
+    "placement": "native_seven_curve_heads_before_activation",
+    "optimizer_branch": "light"
+  }
+}
